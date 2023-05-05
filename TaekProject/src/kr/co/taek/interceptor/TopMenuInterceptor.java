@@ -1,0 +1,32 @@
+package kr.co.taek.interceptor;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import kr.co.taek.beans.BoardInfoBean;
+import kr.co.taek.service.TopMenuService;
+
+public class TopMenuInterceptor implements HandlerInterceptor{
+	
+	/*인터셉터는 자동주입을 통해 빈을 주입받지 못하기 떄문 인터셉터를 등록하는 쪽에서 빈을 주입받은 후 생성자로 받아서 작업*/
+	private TopMenuService topMenuService;
+	
+	public TopMenuInterceptor(TopMenuService topMenuService) {
+		this.topMenuService = topMenuService;
+	}
+	
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<BoardInfoBean> topMenuList = topMenuService.getTopMenuList();
+		request.setAttribute("topMenuList", topMenuList);
+		
+		return true;
+	}
+}
