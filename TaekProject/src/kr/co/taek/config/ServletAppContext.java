@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import kr.co.taek.interceptor.TopMenuInterceptor;
 import kr.co.taek.mapper.BoardMapper;
 import kr.co.taek.mapper.TopMenuMapper;
+import kr.co.taek.mapper.UserMapper;
 import kr.co.taek.service.TopMenuService;
 
 
@@ -102,6 +105,13 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return factoryBean;
 	}
 	
+	@Bean
+	public MapperFactoryBean<UserMapper> getUserMapper(SqlSessionFactory factory) throws Exception{
+		MapperFactoryBean<UserMapper> factoryBean = new MapperFactoryBean<UserMapper>(UserMapper.class);
+		factoryBean.setSqlSessionFactory(factory);
+		return factoryBean;
+	}
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		// TODO Auto-generated method stub
@@ -112,6 +122,19 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
 		reg1.addPathPatterns("/**");
 	}
+	/*경로충돌 관리해주는 bean*/
+
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer PropertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+	/*에러메세지 파일 메세지로 등록*/
+	@Bean  
+	public ReloadableResourceBundleMessageSource messageSource() {
+		ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
+		res.setBasenames("/WEB-INF/properties/error_message");
+		return res;
+	}		
 }
 
 
