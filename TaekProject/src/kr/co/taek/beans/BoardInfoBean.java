@@ -17,4 +17,5 @@ public class BoardInfoBean {
 		this.board_info_name = board_info_name;
 	}
 	
+	
 }
