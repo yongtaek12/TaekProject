@@ -5,9 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 import kr.co.taek.beans.ContentBean;
-/* jdbcType=VARCHAR 쓰는 이유 테이블상 null 허용이지만 null 값을 넣으면 마이바티스에 오류가 발생해여 잡기위해 설정*/
+/* jdbcType=VARCHAR 쓰는 이유 테이블상 null 허용이지만 null 값을 넣으면 마이바티스에 오류가 발생해여 해결하기 위해 설정*/
 public interface BoardMapper {
 	
 	@SelectKey(statement = "select content_seq.nextval from dual", keyProperty = "content_idx", before = true, resultType = int.class)
@@ -33,10 +34,16 @@ public interface BoardMapper {
 	
 	@Select("select a2.user_name as content_writer_name, " + 
 			"       to_char(a1.content_date, 'YYYY-MM-DD') as content_date, " + 
-			"       a1.content_subject, a1.content_text, a1.content_file " + 
+			"       a1.content_subject, a1.content_text, a1.content_file, a1.content_writer_idx " + 
 			"from content_table a1, user_table a2 " + 
 			"where a1.content_writer_idx = a2.user_idx " + 
 			"      and content_idx = #{content_idx}")
 	ContentBean getContentInfo(int content_idx);
+	
+	@Update("update content_table " +
+			"set content_subject = #{content_subject}, content_text = #{content_text}, " +
+			"content_file = #{content_file, jdbcType=VARCHAR} " +
+			"where content_idx = #{content_idx}")
+	void modifyContentInfo(ContentBean modifyContentBean);
 }
 

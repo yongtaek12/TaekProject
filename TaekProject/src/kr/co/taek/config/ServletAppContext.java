@@ -24,10 +24,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import kr.co.taek.beans.UserBean;
 import kr.co.taek.interceptor.CheckLoginInterceptor;
+import kr.co.taek.interceptor.CheckWriterInterceptor;
 import kr.co.taek.interceptor.TopMenuInterceptor;
 import kr.co.taek.mapper.BoardMapper;
 import kr.co.taek.mapper.TopMenuMapper;
 import kr.co.taek.mapper.UserMapper;
+import kr.co.taek.service.BoardService;
 import kr.co.taek.service.TopMenuService;
 
 
@@ -60,7 +62,10 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Resource(name = "loginUserBean")
 	private UserBean loginUserBean;
-		
+	
+	@Autowired
+	private BoardService boardService;
+	
 	// Controller의 메서드가 반환하는 jsp의 이름 앞뒤에 경로와 확장자를 붙혀주도록 설정한다.
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -129,11 +134,15 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
 		reg1.addPathPatterns("/**");
-		/*로그인하는경우만 해당 URL 통과*/
+		
 		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginUserBean);
 		InterceptorRegistration reg2 = registry.addInterceptor(checkLoginInterceptor);
 		reg2.addPathPatterns("/user/modify", "/user/logout", "/board/*");
 		reg2.excludePathPatterns("/board/main");
+		
+		CheckWriterInterceptor checkWriterInterceptor = new CheckWriterInterceptor(loginUserBean, boardService);
+		InterceptorRegistration reg3 = registry.addInterceptor(checkWriterInterceptor);
+		reg3.addPathPatterns("/board/modify", "/board/delete");
 	}
 	
 	@Bean
@@ -147,12 +156,12 @@ public class ServletAppContext implements WebMvcConfigurer{
 		res.setBasenames("/WEB-INF/properties/error_message");
 		return res;
 	}
+	
 	@Bean
 	public StandardServletMultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
 	}
 }
-
 
 
 
