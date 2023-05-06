@@ -1,5 +1,7 @@
 package kr.co.taek.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,28 @@ public class BoardController {
 	@GetMapping("/main")
 	public String main(@RequestParam("board_info_idx") int board_info_idx,
 					   Model model) {
-		
+		System.out.println("안녕하세요" +board_info_idx);
 		model.addAttribute("board_info_idx", board_info_idx);
+		
+		String boardInfoName = boardService.getBoardInfoName(board_info_idx);
+		model.addAttribute("boardInfoName", boardInfoName);
+		
+		List<ContentBean> contentList = boardService.getContentList(board_info_idx);
+		model.addAttribute("contentList", contentList);
 		
 		return "board/main";
 	}
 	
 	@GetMapping("/read")
-	public String read() {
+	public String read(@RequestParam("board_info_idx") int board_info_idx,
+					   @RequestParam("content_idx") int content_idx,
+					   Model model) {
+		
+		model.addAttribute("board_info_idx", board_info_idx);
+		
+		ContentBean readContentBean = boardService.getContentInfo(content_idx);
+		model.addAttribute("readContentBean", readContentBean);
+		
 		return "board/read";
 	}
 	
