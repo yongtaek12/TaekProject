@@ -36,13 +36,13 @@
   * 해당 게시글 수정 후 수정 했던 해당 게시글 페이지로 이동
   * 다른 유저가 작성한 글은 수정하기 삭제하기 버튼 안보이게 처리
   
-### 1. 회원가입 유효성 및 중복체크 정보수정
+#### 1. 회원가입 유효성 및 중복체크 정보수정
 <img width="80%" src="https://user-images.githubusercontent.com/72364856/236682499-da14adc0-7ad5-4952-aa3e-40dd5d9acd38.gif"/>
 
-### 2. 회원로그인 실패 로그인 성공시
+#### 2. 회원로그인 실패 로그인 성공시
 <img width="80%" src="https://user-images.githubusercontent.com/72364856/236680981-1248a7f1-8812-4977-afe6-d4cecdf8173c.gif"/>
 
-### 3. 글쓰기 수정 및 삭제
+#### 3. 글쓰기 수정 및 삭제
 <img width="80%" src="https://user-images.githubusercontent.com/72364856/236681967-9fc7da3d-216e-4f91-9467-1d3454c0d053.gif"/>
 
 
