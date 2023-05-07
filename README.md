@@ -1,17 +1,36 @@
-# TaekProject
-기본게시판
-<div align="center">
-	<img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white" />
-	<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" />
-	<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
-</div>
-<hr>
-<div
-- 프로젝트명 : 기본게시판
-</div>
-- 개발인원 : 1
-- 개발기간 : 2023.04.30 ~ 2020.05.07
-- 내용 : SpringMVC패턴을 로그인 게시판
-- 주요 기능 : 
-- 개발환경 : MyBatis, Oracle, Spring Boot 4, Bootstrap 4, JSP & Servlet, Javascript, Vue.js, jQuery
-&emsp;[QnaController 소스코드](https://github.com/ohna93/Delibrary/blob/master/Delibrary_final_1130/src/main/java/com/example/demo/controller/QnaController.java)  
+# 기본게시판
+### 1 개요
+*  프로젝트명 : 기본게시판
+*  개발인원 : 1
+* 개발기간 : 2023.04.30 ~ 2020.05.07
+* 내용 : SpringMVC 패턴을 로그인 게시판
+* 주요 기능 : 
+  * 게시판 - CRUD 기능, 페이징
+  * 사용자 - Security 회원가입 및 로그인, 회원 정보 수정, 유효성 검사 및 중복 검사 <br>
+* 개발언어 : JAVA 1.8
+* 개발환경 : MyBatis, Oracle, Spring MVC, Bootstrap 4, JSP & Servlet, Javascript
+* 데이터베이스 : Oracle
+* 형광관리 : Git
+### 2 요구사항 분석
+  #### 1. 회원 가입 페이지
+* 유효성 검사
+  * 사용자 이름은 최소 2 ~ 4글자이며, 특수문자 및 영문제외 한 한글 (ㄱ-ㅎ, 가 - 힣)으로 구성
+  * 아이디는 최소 2 ~ 4글자이며 특수문자를 제외한 한글 (ㄱ-ㅎ, 가-힣), 알파벳 대소문자(a-z, A-Z), 숫자(0-9)로 구성
+* 중복확인
+  * 데이터베이스에 존재하는 이름 또는 아이디를 입력한 채 회원가입 버튼을 누른 경우 "이미 사용중인 아이디입니다."의 메시지를 보여주기
+  * 모든 검사가 통과되었다면 로그인 페이지로 이동시키기
+ #### 2. 로그인 페이지
+  * 로그인을 하지 않은 경우 아래 페이지만 이용가능
+    * 회원가입 페이지
+    * 로그인 페이지
+    * 메인 페이지
+    * 게시글 목록 조회 페이지
+  * 로그인 검사
+    * 아이디와 비밀번호가 일치하지 않을 시 "아이디 또는 비밀번호가 일치하지 않습니다. "의 메시지를 보여주기
+    * 다른 아이디로 작성한 글 수정 불가능
+  #### 3. 회원정보 수정
+    * 회원정보 수정은 비밀번호만 가능
+
+
+
+  
