@@ -30,6 +30,9 @@
     * 다른 아이디로 작성한 글 수정 불가능
  #### 3. 회원정보 수정
   * 회원정보 수정은 비밀번호만 가능
+  
+### 1. 회원로그인 실패 로그인 성공시
+<img width="80%" src="https://user-images.githubusercontent.com/72364856/236680981-1248a7f1-8812-4977-afe6-d4cecdf8173c.gif"/>
 
 
 
