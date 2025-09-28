@@ -10,7 +10,7 @@
 * 개발언어 : JAVA 1.8
 * 개발환경 : MyBatis, Oracle, Spring MVC, Bootstrap 4, JSP & Servlet, Javascript
 * 데이터베이스 : Oracle
-* 형광관리 : Git
+* 형상관리 : Git
 ### 2 요구사항 분석
   #### 1. 회원 가입 페이지
 * 유효성 검사
